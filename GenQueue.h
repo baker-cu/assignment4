@@ -9,12 +9,12 @@ template <typename T>
 class GenQueue
 {
     public:
-        GenQueue();
-        GenQueue(int maxSize);
-        ~GenQueue();
+        GenQueue();//default constructor
+        GenQueue(int maxSize);//constructor
+        ~GenQueue();//destructor
 
-        void insert(T d);
-        T remove();
+        void insert(T d);//insert an item at back
+        T remove();//remove and item from front of queue
         T front();
 
         bool isFull();
