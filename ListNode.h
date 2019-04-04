@@ -10,7 +10,7 @@ class ListNode
 {
     public:
         ListNode();
-        ListNode(int d);
+        ListNode(T d);
         ~ListNode();
 
     private:
@@ -19,4 +19,27 @@ class ListNode
         ListNode *prev;
 };
 
-#endif LIST_NODE_H
+template <typename T>
+inline ListNode<T>::ListNode()
+{
+    data = NULL;
+    next = NULL;
+    prev = NULL;
+}
+
+template <typename T>
+inline ListNode<T>::ListNode(T d)
+{
+    data = d;
+    next = NULL;
+    prev = NULL;
+}
+
+template <typename T>
+inline ListNode<T>::~ListNode()
+{
+    next = NULL;
+    prev = NULL;
+}
+
+#endif

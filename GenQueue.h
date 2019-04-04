@@ -1,7 +1,8 @@
 #ifndef GEN_QUEUE_H
 #define GEN_QUEUE_H
 
-#include <iostream>;
+#include <iostream>
+#include "DoublyLinkedList.h"
 
 using namespace std;
 
@@ -10,44 +11,24 @@ class GenQueue
 {
     public:
         GenQueue();//default constructor
-        GenQueue(int maxSize);//constructor
         ~GenQueue();//destructor
 
         void insert(T d);//insert an item at back
         T remove();//remove and item from front of queue
-        T front();
+        T front();//returns element at the front
 
-        bool isFull();
-        bool isEmpty();
-        int getSize();
+        bool isFull();//don't need becuase Linked-List does not fill
+        bool isEmpty();//returns if the queue is empty
+        int getSize();//returns number of elements in the queue
 
     private:
-        int mSize;
-        int head;//front of queue
-        int tail;//front of queue
-        int numElements;
-
-        T *myQueue;
+        DoublyLinkedList<T> *myQueue;
 };
 
 template <typename T>
 inline GenQueue<T>::GenQueue()
 {
-    myQueue = new T[20];
-    mSize = 20;
-    numElements = 0;
-    head = 0;
-    tail = -1;
-}
-
-template <typename T>
-inline GenQueue<T>::GenQueue(int maxSize)
-{
-    myQueue = new T[maxSize];
-    mSize = maxSize;
-    numElements = 0;
-    head = 0;
-    tail = -1;
+    myQueue = new DoublyLinkedList<T>();
 }
 
 template <typename T>
@@ -59,31 +40,26 @@ inline GenQueue<T>::~GenQueue()
 template <typename T>
 inline void GenQueue<T>::insert(T x)
 {
-    //check if full...make bigger queue
-
-    if(tail == mSize-1)
-        tail = -1;
-
-    myQueue[++tail] = x;
-    ++numElements;
+    myQueue->insertBack(x);
 }
 
 template <typename T>
-inline T GenQueue::remove()
+inline T GenQueue<T>::remove()
 {
-    //error checking
+    return(myQueue->removeFront());
+}
 
-    if(head == msize)
-        head = 0;
+template <typename T>
+inline T GenQueue<T>::front()
+{
+    return(myQueue->getFront());
+}
 
-    T c = NULL;
-    c = myQueue[head];
-
-    ++head;
-    numElements--;
-
-    return c;
+template <typename T>
+inline int GenQueue<T>::getSize()
+{
+    return(myQueue->getSize());
 }
 
 
-#endif GEN_QUEUE_H
+#endif

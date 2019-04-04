@@ -2,6 +2,7 @@
 #define DOUBLY_LINKED_LIST_H
 
 #include <iostream>
+#include "ListNode.h"
 
 using namespace std;
 
@@ -16,15 +17,17 @@ class DoublyLinkedList
         T removeFront();
 
         void printList();//maybe
-        T find(T val);//maybe
+        int find(int val);//maybe
 
         T deletePos(int pos);
         bool isEmpty();
+
         unsigned int getSize();
+        T getFront();
 
     private:
-        ListNode *front;
-        ListNode *back;
+        ListNode<T> *front;
+        ListNode<T> *back;
         unsigned int size; // can't be negative
 };
 
@@ -46,7 +49,7 @@ inline DoublyLinkedList<T>::~DoublyLinkedList()
 template <typename T>
 inline void DoublyLinkedList<T>::insertFront(T x)
 {
-    ListNode *node = new ListNode(x);
+    ListNode<T> *node = new ListNode<T>(x);
 
     if (isEmpty)
     {
@@ -57,23 +60,52 @@ inline void DoublyLinkedList<T>::insertFront(T x)
         node->next = front;
         front->prev = node;
     }
-    font = node;
+    front = node;
     size++;
 }
 
 template <typename T>
 inline void DoublyLinkedList<T>::insertBack(T x)
 {
+    ListNode<T> *node = new ListNode<T>(x);
 
+    if(isEmpty)
+        front = node;
+
+    else
+    {
+        node->prev = back;
+        back->next = node;
+    }
+    back = node;
+    size++;
 }
 
 template <typename T>
 inline T DoublyLinkedList<T>::removeFront()
 {
+    ListNode<T> *node = front;
+    if(isEmpty)
+        throw string("List is empty.");
+    if(front->next == NULL)
+    {
+        back = NULL;
+    }
+    else
+    {
+        front->next->prev = NULL;
+    }
+    front = front->next;
+    T temp = node->data;
+    node->next = NULL;
 
+    delete node;
+    size--;
+
+    return temp;
 }
 
-template <typename T>
+/*template <typename T>
 inline void DoublyLinkedList<T>::printList()
 {
     //maybe used in template class idk
@@ -83,12 +115,32 @@ template <typename T>
 inline T DoublyLinkedList<T>::find(T val)
 {
     //maybe used in template class idk
-}
+}*/
 
 template <typename T>
 inline T DoublyLinkedList<T>::deletePos(int pos)
 {
+    int idx = 0;
 
+    ListNode<T> *curr = front;
+    ListNode<T> *prev = front;
+
+    while(idx != pos)
+    {
+        prev = curr;
+        curr = curr->next;
+        ++idx;
+    }
+
+    //when we find the next position
+    prev->next = curr->next;
+    curr->next = NULL;
+
+    T temp = curr->data;
+    delete curr;
+    size--;
+
+    return temp;
 }
 
 template <typename T>
@@ -102,4 +154,10 @@ inline unsigned int DoublyLinkedList<T>::getSize()
 {
     return(size);
 }
-#endif DOUBLY_LINKED_LIST_H
+
+template <typename T>
+inline T DoublyLinkedList<T>::getFront()
+{
+    return(front);
+}
+#endif
