@@ -2,40 +2,60 @@
 #define ROOM_C
 
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "Room.h"
 
 Room::Room()
 {
-    GenQueue<student> *line = new GenQueue<student>();
-    DoublyLinkedList<window> *openWindows = new DoublyLinkedList<window>();
+    GenQueue<Student> *line = new GenQueue<Student>();
+    DoublyLinkedList<Window> *openWindows = new DoublyLinkedList<Window>();
 
     numWindows = 0;
+    time = 0;
 }
 
 Room::Room(string filepath)
 {
-    GenQueue<student> *line = new GenQueue<student>();
-    DoublyLinkedList<window> *openWindows = new DoublyLinkedList<window>();
+    time = 0;
+
+    GenQueue<Student> *line = new GenQueue<Student>();
+    DoublyLinkedList<Window> *openWindows = new DoublyLinkedList<Window>();
 
     ifstream file(filepath);
-    int line;
+    string l;
 
-    getline(file, line);//first line of the file
-    numWindows = line;
-
-    while(getline(file, line))
+    getline(file, l);//first line of the file
+    int s = stoi(l);
+    numWindows = s;
+    //add windows to openWindows list
+    for(int i = 0; i < numWindows; i++)
     {
-        int toa = line; //time of arrival
+        openWindows->insertFront(Window());
+    }
 
-        getline(file, line));
-        int numStu = line; //number of students at that time
+    //fills line with students and their times of arrival
+    while(getline(file, l))
+    {
+        s = stoi(l);
+        int toa = s; //time of arrival
 
-        for(int i = x; i > 0; i--)//iterates through time needed
+        getline(file, l);
+        s = stoi(l);
+        int numStu = s; //number of students at that time
+
+        for(int i = numStu; i > 0; i--)//iterates through time needed
         {
-            getline(file, line);//get each time need for the studens in this first group
-            *line->insert(Student(line),toa);//inserts that student into the queue with their time needed
+            getline(file, l);//get each time need for the studens in this first group
+            s = stoi(l);
+            Student tempStu = Student(s,toa);
+            *line->insert(tempStu);//inserts that student into the queue with their time needed
         }
     }
+
+
+
+
 
 }
 

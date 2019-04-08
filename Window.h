@@ -19,6 +19,7 @@ class Window
         bool open;
         int timeOc;
         int timeUnoc;
+        int numWindows;
 };
 
 #endif

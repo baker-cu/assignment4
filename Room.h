@@ -29,7 +29,7 @@ class Room
         DoublyLinkedList<Window> *openWindows; //list of all of the open windows to iterate through
 
         int numWindows;
-
+        int time;
 };
 
 #endif

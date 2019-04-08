@@ -14,7 +14,8 @@ class Student
 
         bool nextTickWind();//bool to return false when time needed runs out
         void nextTickWait();
-        int getTime();
+        int getWaitTime();
+        int getTOA();
 
     private:
         int waitTime;

@@ -40,9 +40,14 @@ inline void Student::nextTickWait()
     waitTime++;
 }
 
-inline int Student::getTime()
+inline int Student::getWaitTime()
 {
     return waitTime;
+}
+
+inline int Student::getTOA()
+{
+    return (timeArrival);
 }
 
 #endif
