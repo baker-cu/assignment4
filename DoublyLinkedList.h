@@ -24,6 +24,7 @@ class DoublyLinkedList
 
         unsigned int getSize();
         T getFront();
+        T getPos(int pos);
 
     private:
         ListNode<T> *front;
@@ -160,4 +161,22 @@ inline T DoublyLinkedList<T>::getFront()
 {
     return(front);
 }
+
+template <typename T>
+inline T DoublyLinkedList<T>::getPos(int pos)
+{
+    int idx = 0;
+
+    ListNode<T> *curr = front;
+    ListNode<T> *prev = front;
+
+    while(idx != pos)
+    {
+        prev = curr;
+        curr = curr->next;
+        ++idx;
+    }
+    return curr;
+}
+
 #endif

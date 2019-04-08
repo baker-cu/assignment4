@@ -9,12 +9,17 @@ class Student
 {
     public:
         Student();
-        Stuent(int windTime);
+        Student(int windTime, int toa);
         ~Student();
+
+        bool nextTickWind();//bool to return false when time needed runs out
+        void nextTickWait();
+        int getTime();
 
     private:
         int waitTime;
-        int windowTime;
+        int windowTime; //time needed at window
+        int timeArrival;
 
 };
 

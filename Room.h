@@ -3,22 +3,33 @@
 
 #include <iostream>
 #include "GenQueue.h"
+#include "DoublyLinkedList.h"
+#include "Student.cpp"
+#include "Window.cpp"
 
 using namespace std;
 
-class room
+class Room
 {
     public:
         Room();
-        Room(int numWind);
+        Room(string filepath);
         ~Room();
+
+        bool fillWind(Student s);//trys to fill windows in
+        void nextTick();//moves time forward by one
+
+        bool isLineEmpty();
+        bool isWindowEmpty();
+
+        void sim();
+
     private:
-        GenQueue *line; //queue for the line of students
-        
+        GenQueue<Student> *line; //queue for the line of students
+        DoublyLinkedList<Window> *openWindows; //list of all of the open windows to iterate through
 
         int numWindows;
 
-
-}
+};
 
 #endif
