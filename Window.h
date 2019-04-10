@@ -2,6 +2,7 @@
 #define WINDOW_H
 
 #include <iostream>
+#include "Student.cpp"
 
 using namespace std;
 
@@ -13,7 +14,8 @@ class Window
 
         bool isEmpty();
 
-        bool oc(Student s);//RITE THIS
+        void oc(Student s);
+        Student* getStu();
 
         int getTimeOc();
         int getTimeUnoc();

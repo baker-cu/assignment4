@@ -11,6 +11,7 @@ inline Window::Window()
     open = true;
     timeOc = 0;
     timeUnoc = 0;
+    stu = NULL;
 }
 
 inline Window::~Window()
@@ -18,6 +19,7 @@ inline Window::~Window()
     open = false;
     timeOc = 0;
     timeUnoc = 0;
+    delete stu;
 }
 
 inline bool Window::isEmpty()
@@ -36,6 +38,16 @@ inline int Window::getTimeOc()
 inline int Window::getTimeUnoc()
 {
     return timeUnoc;
+}
+
+inline void Window::oc(Student s)
+{
+    stu = &s;
+}
+
+inline Student* Window::getStu()
+{
+    return stu;
 }
 
 #endif

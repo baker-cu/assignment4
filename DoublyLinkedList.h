@@ -123,7 +123,7 @@ template <typename T>
 inline T DoublyLinkedList<T>::removeFront()
 {
     ListNode<T> *node = front;
-    if(isEmpty)
+    if(isEmpty())
         throw string("List is empty.");
     if(front->next == NULL)
     {
@@ -216,5 +216,7 @@ inline T DoublyLinkedList<T>::getPos(int pos)
     T temp = curr->data;
     return temp;
 }
+
+
 
 #endif

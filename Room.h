@@ -6,6 +6,7 @@
 #include "DoublyLinkedList.h"
 #include "Student.cpp"
 #include "Window.cpp"
+#include "Stats.cpp"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ class Room
         ~Room();
 
         bool fillWind();//trys to fill windows in
-        void nextTick();//moves time forward by one
+        bool nextTick();//moves time forward by one
 
         bool isLineEmpty();
         bool isWindowEmpty();
@@ -30,6 +31,8 @@ class Room
 
         int numWindows;
         int time;
+
+        Stats* stats;
 };
 
 #endif

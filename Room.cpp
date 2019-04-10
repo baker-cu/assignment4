@@ -10,6 +10,7 @@ inline Room::Room()
 {
     GenQueue<Student> *line = new GenQueue<Student>();
     DoublyLinkedList<Window> *openWindows = new DoublyLinkedList<Window>();
+    Stats* stats = new Stats();
 
     numWindows = 0;
     time = 0;
@@ -21,6 +22,7 @@ inline Room::Room(string filepath)
 
     GenQueue<Student> *line = new GenQueue<Student>();
     DoublyLinkedList<Window> *openWindows = new DoublyLinkedList<Window>();
+    Stats* stats = new Stats();
 
     ifstream file(filepath);
     string l;
@@ -67,26 +69,35 @@ inline Room::~Room()
 inline bool Room::fillWind() //returns false if no windows are open
 {
     //iterate through list of windows and look for empty window
-    Window temp;
     for(int i = 0; i<openWindows->getSize(); i++)
     {
-        temp = openWindows->getPos(i);
-        if(temp.isEmpty())
-
+        if((openWindows->getPos(i)).isEmpty())
+        {
+            (openWindows->getPos(i)).oc(line->remove());
             return true;
+        }
     }
     return false;
 }
 
-inline Room::nextTick()
+inline bool Room::nextTick()
 {
+    //code to check if line and all windows are empty
+            //return false;
     time++;
     //check through occupied windows
-    //if student arival time + time needed > current time
-
-    //store the students data in stats
-
-    //reopen the window
+    for(int i = 0; i<openWindows->getSize(); i++)
+    {
+        openWindows->getPos(i).getStu()->nextTickWind();//next tick the student at the window
+        //check if student is done at window
+        //if student arival time + time needed = current time
+        if(openWindows->getPos(i).getStu()->getWindTime() == time - openWindows->getPos(i).getStu()->getTOA())
+        {
+            stats->addStuTime(openWindows->getPos(i).getStu()->getWaitTime());//add students stats before deleting
+            openWindows->getPos(i).oc(line->remove());
+        }
+    }
+    return true;
 }
 
 #endif

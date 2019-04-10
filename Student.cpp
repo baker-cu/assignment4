@@ -50,4 +50,9 @@ inline int Student::getTOA()
     return (timeArrival);
 }
 
+inline int Student::getWindTime()
+{
+    return windowTime;
+}
+
 #endif
