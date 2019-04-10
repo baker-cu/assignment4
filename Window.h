@@ -12,14 +12,19 @@ class Window
         ~Window();
 
         bool isEmpty();
+
+        bool oc(Student s);//RITE THIS
+
         int getTimeOc();
         int getTimeUnoc();
+
 
     private:
         bool open;
         int timeOc;
         int timeUnoc;
-        int numWindows;
+        Student* stu;
+
 };
 
 #endif

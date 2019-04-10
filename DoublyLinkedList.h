@@ -2,9 +2,46 @@
 #define DOUBLY_LINKED_LIST_H
 
 #include <iostream>
-#include "ListNode.h"
+
 
 using namespace std;
+
+template <typename T>
+class ListNode
+{
+    public:
+        ListNode();
+        ListNode(T d);
+        ~ListNode();
+
+
+        T data;
+        ListNode *next;
+        ListNode *prev;
+};
+
+template <typename T>
+inline ListNode<T>::ListNode()
+{
+    data = NULL;
+    next = NULL;
+    prev = NULL;
+}
+
+template <typename T>
+inline ListNode<T>::ListNode(T d)
+{
+    data = d;
+    next = NULL;
+    prev = NULL;
+}
+
+template <typename T>
+inline ListNode<T>::~ListNode()
+{
+    next = NULL;
+    prev = NULL;
+}
 
 template <typename T>
 class DoublyLinkedList
@@ -52,7 +89,7 @@ inline void DoublyLinkedList<T>::insertFront(T x)
 {
     ListNode<T> *node = new ListNode<T>(x);
 
-    if (isEmpty)
+    if (isEmpty())
     {
         back = node;
     }
@@ -70,7 +107,7 @@ inline void DoublyLinkedList<T>::insertBack(T x)
 {
     ListNode<T> *node = new ListNode<T>(x);
 
-    if(isEmpty)
+    if(isEmpty())
         front = node;
 
     else
@@ -176,7 +213,8 @@ inline T DoublyLinkedList<T>::getPos(int pos)
         curr = curr->next;
         ++idx;
     }
-    return curr;
+    T temp = curr->data;
+    return temp;
 }
 
 #endif
