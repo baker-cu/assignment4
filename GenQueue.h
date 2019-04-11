@@ -61,5 +61,11 @@ inline int GenQueue<T>::getSize()
     return(myQueue->getSize());
 }
 
+template <typename T>
+inline bool GenQueue<T>::isEmpty()
+{
+    return(myQueue->isEmpty());
+}
+
 
 #endif

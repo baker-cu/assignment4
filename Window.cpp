@@ -42,12 +42,25 @@ inline int Window::getTimeUnoc()
 
 inline void Window::oc(Student s)
 {
+    timeUnoc = 0;
     stu = &s;
+    open = false;
 }
 
 inline Student* Window::getStu()
 {
     return stu;
+}
+
+inline void Window::unoc()
+{
+    stu == NULL;
+    open == true;
+}
+
+inline void Window::nextTickUnoc()
+{
+    timeUnoc++;
 }
 
 #endif

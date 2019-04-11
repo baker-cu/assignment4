@@ -50,27 +50,27 @@ inline int Stats::getOverFive()
     return count;
 }
 
-inline int Stats::getMeanStu()
+inline float Stats::getMeanStu()
 {
     int sum;
     for(int i = 0; i<stuWaitTimes->getSize();i++)
     {
         sum+=stuWaitTimes->getPos(i);
     }
-    int mean;
+    float mean;
     mean = sum/(stuWaitTimes->getSize());
 
     return mean;
 }
 
-inline int Stats::getMeanWind()
+inline float Stats::getMeanWind()
 {
     int sum;
     for(int i = 0; i<windIdleTimes->getSize();i++)
     {
         sum+=windIdleTimes->getPos(i);
     }
-    int mean;
+    float mean;
     mean = sum/(windIdleTimes->getSize());
 
     return mean;

@@ -14,10 +14,10 @@ class Stats
 
         int getOverTen();
         int getMedianStu();//need to sort for this to work
-        int getMeanStu();
+        float getMeanStu();
         int getLongestStu();
 
-        int getMeanWind();
+        float getMeanWind();
         int getLongestWind();
         int getOverFive();
 

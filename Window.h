@@ -15,10 +15,13 @@ class Window
         bool isEmpty();
 
         void oc(Student s);
+        void unoc();
         Student* getStu();
 
         int getTimeOc();
         int getTimeUnoc();
+
+        void nextTickUnoc();
 
 
     private:

@@ -196,7 +196,7 @@ inline unsigned int DoublyLinkedList<T>::getSize()
 template <typename T>
 inline T DoublyLinkedList<T>::getFront()
 {
-    return(front);
+    return(front->data);
 }
 
 template <typename T>

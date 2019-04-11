@@ -31,6 +31,7 @@ class Room
 
         int numWindows;
         int time;
+        bool done;
 
         Stats* stats;
 };

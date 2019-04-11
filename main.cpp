@@ -14,5 +14,10 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    
+    Room* registrar = new Room(argv[1]);
+
+    registrar->sim();
+
+
+    return 0;
 }
