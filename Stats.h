@@ -24,6 +24,8 @@ class Stats
         void addStuTime(int t);
         void addWindTime(int t);
 
+        void printStu();
+
 
     private:
 

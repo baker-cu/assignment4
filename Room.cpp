@@ -48,7 +48,6 @@ inline Room::Room(string filepath)
         getline(file, l);
         s = stoi(l);
         int numStu = s; //number of students at that time
-
         for(int i = numStu; i > 0; i--)//iterates through time needed
         {
             getline(file, l);//get each time need for the studens in this first group
@@ -68,21 +67,6 @@ inline Room::~Room()
     time = 0;
 }
 
-/*inline bool Room::fillWind() //returns false if no windows are open
-{
-    //iterate through list of windows and look for empty window
-    for(int i = 0; i<openWindows->getSize(); i++)
-    {
-        if((openWindows->getPos(i)).isEmpty())
-        {
-            (openWindows->getPos(i)).oc(line->remove());
-            stats->addWindTime(openWindows->getPos(i).getTimeUnoc());
-            return true;
-        }
-    }
-    return false;
-}*/
-
 inline bool Room::nextTick()
 {
     //check if line and all windows are empty
@@ -91,18 +75,21 @@ inline bool Room::nextTick()
     {
         for(int i = 0; i<openWindows->getSize(); i++)
         {
-            if(!openWindows->getPos(i).isEmpty())
+            if(openWindows->getPos(i).isEmpty() == false)
                 fullWindows++;
         }
         if(fullWindows == 0)
+        {
             done = true;
             return false;
+        }
     }
+
     time++;
     //check through occupied windows
     for(int i = 0; i<openWindows->getSize(); i++)//iterate through windows
     {
-        if(!openWindows->getPos(i).isEmpty())//checks if window is full (not empty)
+        if(openWindows->getPos(i).isEmpty() == false)//checks if window is full (not empty)
         {
             if(openWindows->getPos(i).getStu()->nextTickWind() == false)//next tick the student at the window
             {//if false then their time is up
@@ -113,28 +100,26 @@ inline bool Room::nextTick()
     for(int i = 0; i<openWindows->getSize(); i++)//iterate through windows
     {
         //if window is empty
-        if(openWindows->getPos(i).isEmpty())
+        if(openWindows->getPos(i).isEmpty() == true)
         {
-            if(line->front().getTOA() >= time)//if student has "arrived"
+            if(line->isEmpty() == false)
             {
-                //first must get stats from empty window and student
-                stats->addStuTime(time-(line->front().getTOA()));
-                stats->addWindTime(openWindows->getPos(i).getTimeUnoc());
-                //add student to window
-                Student temp = line->remove();
-                Window tempW = openWindows->getPos(i);
-                tempW.oc(temp);
-                cout<<"end of if"<<endl;
-            }
+                if(line->front().getTOA() <= time)//if student has "arrived"
+                {
+                    //first must get stats from empty window and student
+                    stats->addStuTime(time-(line->front().getTOA()));
+                    stats->addWindTime(openWindows->getPos(i).getTimeUnoc());
+                    //add student to window
+                    Student temp = line->remove();
+                    Window tempW = openWindows->getPos(i);
+                    tempW.oc(temp);
+                }
 
-            //cout<<"out of if"<<endl; ///////////why!!!!!!!!!??????
-
-            else//no student to put into window
-            {
-                cout<<"in else"<<endl;
-                openWindows->getPos(i).nextTickUnoc(); //adds idle time to window
+                else//no student to put into window
+                {
+                    openWindows->getPos(i).nextTickUnoc(); //adds idle time to window
+                }
             }
-            cout<<"after else"<<endl;
         }
     }
     done = false;

@@ -22,18 +22,20 @@ class Room
 
         bool isLineEmpty();
         bool isWindowEmpty();
+        Stats* getStats();
 
         void sim();
 
     private:
         GenQueue<Student> *line; //queue for the line of students
         DoublyLinkedList<Window> *openWindows; //list of all of the open windows to iterate through
+        Stats *stats;
 
         int numWindows;
         int time;
         bool done;
 
-        Stats* stats;
+
 };
 
 #endif

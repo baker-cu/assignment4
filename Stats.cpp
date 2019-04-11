@@ -30,7 +30,7 @@ inline void Stats::addWindTime(int t)
 
 inline int Stats::getOverTen()
 {
-    int count;
+    int count = 0;
     for(int i = 0; i<stuWaitTimes->getSize();i++)
     {
         if(stuWaitTimes->getPos(i)>=10)
@@ -41,7 +41,7 @@ inline int Stats::getOverTen()
 
 inline int Stats::getOverFive()
 {
-    int count;
+    int count = 0;
     for(int i = 0; i<windIdleTimes->getSize();i++)
     {
         if(windIdleTimes->getPos(i)>=5)
@@ -52,7 +52,7 @@ inline int Stats::getOverFive()
 
 inline float Stats::getMeanStu()
 {
-    int sum;
+    int sum = 0;
     for(int i = 0; i<stuWaitTimes->getSize();i++)
     {
         sum+=stuWaitTimes->getPos(i);
@@ -65,7 +65,7 @@ inline float Stats::getMeanStu()
 
 inline float Stats::getMeanWind()
 {
-    int sum;
+    int sum = 0;
     for(int i = 0; i<windIdleTimes->getSize();i++)
     {
         sum+=windIdleTimes->getPos(i);
@@ -102,6 +102,14 @@ inline int Stats::getMedianStu()
 {
     DoublyLinkedList<int>* temp = new DoublyLinkedList<int>;
     return 0;
+}
+
+inline void Stats::printStu()
+{
+    for(int y = 0;y<stuWaitTimes->getSize();y++)
+    {
+        cout<<stuWaitTimes->getPos(y)<<endl;
+    }
 }
 
 #endif

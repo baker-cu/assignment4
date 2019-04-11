@@ -18,8 +18,8 @@ inline Window::~Window()
 {
     open = false;
     timeOc = 0;
-    timeUnoc = 0;
-    delete stu;
+    timeUnoc = 1;
+    stu = NULL;
 }
 
 inline bool Window::isEmpty()
