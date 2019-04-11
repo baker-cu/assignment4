@@ -17,7 +17,7 @@ class Room
         Room(string filepath);
         ~Room();
 
-        bool fillWind();//trys to fill windows in
+        //bool fillWind();//trys to fill windows in
         bool nextTick();//moves time forward by one
 
         bool isLineEmpty();

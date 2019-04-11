@@ -8,8 +8,8 @@ using namespace std;
 
 inline Stats::Stats()
 {
-    DoublyLinkedList<int>* stuWaitTimes = new DoublyLinkedList<int>;
-    DoublyLinkedList<int>* windIdleTimes = new DoublyLinkedList<int>;
+    stuWaitTimes = new DoublyLinkedList<int>;
+    windIdleTimes = new DoublyLinkedList<int>;
 }
 
 inline Stats::~Stats()

@@ -17,7 +17,6 @@ class GenQueue
         T remove();//remove and item from front of queue
         T front();//returns element at the front
 
-        bool isFull();//don't need becuase Linked-List does not fill
         bool isEmpty();//returns if the queue is empty
         int getSize();//returns number of elements in the queue
 

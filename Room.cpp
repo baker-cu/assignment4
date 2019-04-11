@@ -8,9 +8,9 @@
 
 inline Room::Room()
 {
-    GenQueue<Student> *line = new GenQueue<Student>();
-    DoublyLinkedList<Window> *openWindows = new DoublyLinkedList<Window>();
-    Stats* stats = new Stats();
+    line = new GenQueue<Student>();
+    openWindows = new DoublyLinkedList<Window>();
+    stats = new Stats();
 
     numWindows = 0;
     time = 0;
@@ -22,23 +22,23 @@ inline Room::Room(string filepath)
     time = 0;
     done = false;
 
-    GenQueue<Student> *line = new GenQueue<Student>();
-    DoublyLinkedList<Window> *openWindows = new DoublyLinkedList<Window>();
-    Stats* stats = new Stats();
+    line = new GenQueue<Student>();
+    openWindows = new DoublyLinkedList<Window>();
+    stats = new Stats();
+
 
     ifstream file(filepath);
     string l;
 
     getline(file, l);//first line of the file
     int s = stoi(l);
+
     numWindows = s;
     //add windows to openWindows list
     for(int i = 0; i < numWindows; i++)
     {
         openWindows->insertFront(Window());
     }
-
-
     //fills line with students and their times of arrival
     while(getline(file, l))
     {
@@ -53,8 +53,8 @@ inline Room::Room(string filepath)
         {
             getline(file, l);//get each time need for the studens in this first group
             s = stoi(l);
-            Student tempStu = Student(s,toa);
-            line->insert(tempStu);//inserts that student into the queue with their time needed
+            //Student tempStu = Student(s,toa);
+            line->insert(Student(s,toa));//inserts that student into the queue with their time needed
         }
     }
 }
@@ -68,7 +68,7 @@ inline Room::~Room()
     time = 0;
 }
 
-inline bool Room::fillWind() //returns false if no windows are open
+/*inline bool Room::fillWind() //returns false if no windows are open
 {
     //iterate through list of windows and look for empty window
     for(int i = 0; i<openWindows->getSize(); i++)
@@ -81,13 +81,13 @@ inline bool Room::fillWind() //returns false if no windows are open
         }
     }
     return false;
-}
+}*/
 
 inline bool Room::nextTick()
 {
     //check if line and all windows are empty
     int fullWindows = 0;
-    if(line->isEmpty())
+    if(line->getSize() == 0) //seg fault right here for some reason
     {
         for(int i = 0; i<openWindows->getSize(); i++)
         {
@@ -98,7 +98,6 @@ inline bool Room::nextTick()
             done = true;
             return false;
     }
-
     time++;
     //check through occupied windows
     for(int i = 0; i<openWindows->getSize(); i++)//iterate through windows
@@ -119,47 +118,33 @@ inline bool Room::nextTick()
             if(line->front().getTOA() >= time)//if student has "arrived"
             {
                 //first must get stats from empty window and student
-                stats->addStuTime(time - (line->front().getTOA()));
+                stats->addStuTime(time-(line->front().getTOA()));
                 stats->addWindTime(openWindows->getPos(i).getTimeUnoc());
                 //add student to window
-                openWindows->getPos(i).oc(line->remove());
+                Student temp = line->remove();
+                Window tempW = openWindows->getPos(i);
+                tempW.oc(temp);
+                cout<<"end of if"<<endl;
             }
+
+            //cout<<"out of if"<<endl; ///////////why!!!!!!!!!??????
+
             else//no student to put into window
             {
+                cout<<"in else"<<endl;
                 openWindows->getPos(i).nextTickUnoc(); //adds idle time to window
             }
+            cout<<"after else"<<endl;
         }
     }
     done = false;
     return true;
-
-
-
-
-
-
-
-    //what needs to happen in next tick
-    //the tick of the room increases by one
-
-    //if all windows are open and the line is empty (done)
-        //return false to stop sim (done)
-
-    //go through each window (done)
-
-        //if the window is not empty(done)
-            //if student.nextTickWind == true they stay in window (done)
-            //if false they leave window (else) (done)
-
-        //if it is empty...look at the student in the front of the line (done)
-            //if that students arrival time is equal to or greater than the room time they can be put into a window
-                //when they are getting put into the window the students wait time and window idle time needs to be put into the stats
 }
 
 inline void Room::sim()
 {
     //keep doing next tick until there are no more people in the room
-    while(done = false)
+    while(done == false)
     {
         nextTick();
     }
